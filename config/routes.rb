@@ -75,4 +75,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  mount Alto::Engine => "/demo" # e.g. or /feedback or whatever
 end
