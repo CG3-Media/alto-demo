@@ -267,3 +267,4 @@ gem "active_hash"
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
 gem "alto", github: "CG3-Media/alto"
+# gem "alto", path: "../alto"
