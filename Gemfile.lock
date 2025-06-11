@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/CG3-Media/alto.git
-  revision: f40c5cff301a5a217f6987e2fdf50809ee72c319
+  revision: 7ae3fc8b174986ec9df6db79a3d2e03e6df7905a
   specs:
-    alto (0.1.0)
+    alto (1.1.0)
       kaminari (~> 1.2)
       rails (>= 7.0.1, < 9.0)
 

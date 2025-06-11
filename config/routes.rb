@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   draw "sidekiq"
   draw "avo"
 
+  mount Alto::Engine => "/demo" # e.g. or /feedback or whatever
+
   # `collection_actions` is automatically super scaffolded to your routes file when creating certain objects.
   # This is helpful to have around when working with shallow routes and complicated model namespacing. We don't use this
   # by default, but sometimes Super Scaffolding will generate routes that use this for `only` and `except` options.
@@ -75,6 +77,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  mount Alto::Engine => "/demo" # e.g. or /feedback or whatever
 end

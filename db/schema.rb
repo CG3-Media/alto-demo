@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_11_001631) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_11_171914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -167,6 +167,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_11_001631) do
     t.bigint "board_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "archived", default: false, null: false
+    t.index ["archived"], name: "index_alto_tickets_on_archived"
+    t.index ["board_id", "archived"], name: "index_alto_tickets_on_board_id_and_archived"
     t.index ["board_id"], name: "index_alto_tickets_on_board_id"
     t.index ["created_at"], name: "index_alto_tickets_on_created_at"
     t.index ["description"], name: "index_alto_tickets_on_description"
