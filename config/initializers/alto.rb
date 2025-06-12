@@ -68,6 +68,10 @@ Alto.configure do |config|
   #   end
   # end
 
+  config.user_profile_avatar_url do |user_id|
+    "https://avatar.iran.liara.run/public/#{user_id}"
+  end
+
   # Board configuration
   config.allow_board_deletion_with_tickets = false
 end
