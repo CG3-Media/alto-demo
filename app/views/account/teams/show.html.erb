@@ -3,7 +3,8 @@
 
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
-    
-    <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts, hide_back: true unless scaffolding_things_disabled? %>
+    <div class="flex justify-center">
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-md text-2xl font-bold" onclick="window.location.href='<%= alto.root_path %>'">Go to Alto Demo</button>
+    </div>
   <% end %>
 <% end %>

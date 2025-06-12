@@ -50,7 +50,7 @@ Alto.configure do |config|
 
   # Who can access the admin area?
   config.permission :can_access_admin? do
-    user_signed_in?
+    current_user.email.include?("admin")
   end
 
   # Who can manage boards? (Create, edit, delete boards)
