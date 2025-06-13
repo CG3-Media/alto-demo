@@ -4,7 +4,7 @@
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
     <div class="flex justify-center">
-      <button class="bg-blue-500 text-white px-4 py-2 rounded-md text-2xl font-bold" onclick="window.location.href='<%= alto.root_path %>'">Go to Alto Demo</button>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-md text-2xl font-bold" onclick="window.location.href='<%= alto.url_for("/demo") %>'">Go to Alto Demo</button>
     </div>
   <% end %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_12_202345) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_13_004813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_202345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "single_view"
+    t.boolean "allow_public_tagging", default: false, null: false
     t.index ["name"], name: "index_alto_boards_on_name"
     t.index ["single_view"], name: "index_alto_boards_on_single_view"
     t.index ["slug"], name: "index_alto_boards_on_slug", unique: true
@@ -173,6 +174,32 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_202345) do
     t.index ["email"], name: "index_alto_subscriptions_on_email"
     t.index ["ticket_id", "email"], name: "index_alto_subscriptions_on_ticket_id_and_email", unique: true
     t.index ["ticket_id"], name: "index_alto_subscriptions_on_ticket_id"
+  end
+
+  create_table "alto_taggings", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id", "taggable_type", "taggable_id"], name: "index_alto_taggings_on_tag_and_taggable", unique: true
+    t.index ["tag_id"], name: "index_alto_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_alto_taggings_on_taggable"
+    t.index ["taggable_type", "taggable_id"], name: "index_alto_taggings_on_taggable_type_and_taggable_id"
+  end
+
+  create_table "alto_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "board_id", null: false
+    t.string "color"
+    t.integer "usage_count", default: 0, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id", "name"], name: "index_alto_tags_on_board_id_and_name", unique: true
+    t.index ["board_id", "slug"], name: "index_alto_tags_on_board_id_and_slug", unique: true
+    t.index ["board_id"], name: "index_alto_tags_on_board_id"
+    t.index ["usage_count"], name: "index_alto_tags_on_usage_count"
   end
 
   create_table "alto_tickets", force: :cascade do |t|
@@ -478,6 +505,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_202345) do
   add_foreign_key "alto_fields", "alto_boards", column: "board_id"
   add_foreign_key "alto_statuses", "alto_status_sets", column: "status_set_id"
   add_foreign_key "alto_subscriptions", "alto_tickets", column: "ticket_id"
+  add_foreign_key "alto_taggings", "alto_tags", column: "tag_id"
+  add_foreign_key "alto_tags", "alto_boards", column: "board_id"
   add_foreign_key "alto_tickets", "alto_boards", column: "board_id"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
