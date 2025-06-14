@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_13_231333) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_14_005653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -95,6 +95,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_13_231333) do
     t.datetime "updated_at", null: false
     t.string "single_view"
     t.boolean "allow_public_tagging", default: false, null: false
+    t.boolean "allow_voting", default: true, null: false
     t.index ["name"], name: "index_alto_boards_on_name"
     t.index ["single_view"], name: "index_alto_boards_on_single_view"
     t.index ["slug"], name: "index_alto_boards_on_slug", unique: true
