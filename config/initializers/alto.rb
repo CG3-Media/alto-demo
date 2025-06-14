@@ -72,6 +72,9 @@ Alto.configure do |config|
     "https://avatar.iran.liara.run/public/#{user_id}"
   end
 
+  # Image uploads (requires ActiveStorage setup)
+  config.image_uploads_enabled = true
+
   # Board configuration
   config.allow_board_deletion_with_tickets = false
 end
