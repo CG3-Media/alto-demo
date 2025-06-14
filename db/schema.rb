@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_14_005653) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_14_070111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "account_onboarding_invitation_lists", force: :cascade do |t|
     t.bigint "team_id", null: false
@@ -216,15 +217,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_005653) do
     t.datetime "updated_at", null: false
     t.text "field_values"
     t.boolean "archived", default: false, null: false
+    t.index "((((title)::text || ' '::text) || COALESCE(description, ''::text))) gin_trgm_ops", name: "index_alto_tickets_on_title_description_trigram", using: :gin
     t.index ["archived"], name: "index_alto_tickets_on_archived"
     t.index ["board_id"], name: "index_alto_tickets_on_board_id"
     t.index ["created_at"], name: "index_alto_tickets_on_created_at"
     t.index ["description"], name: "index_alto_tickets_on_description"
+    t.index ["description"], name: "index_alto_tickets_on_description_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["field_values"], name: "index_alto_tickets_on_field_values"
     t.index ["locked"], name: "index_alto_tickets_on_locked"
     t.index ["status_slug", "created_at"], name: "index_alto_tickets_on_status_slug_and_created_at"
     t.index ["status_slug"], name: "index_alto_tickets_on_status_slug"
     t.index ["title"], name: "index_alto_tickets_on_title"
+    t.index ["title"], name: "index_alto_tickets_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["user_type", "user_id"], name: "index_alto_tickets_on_user"
   end
 
