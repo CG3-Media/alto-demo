@@ -69,7 +69,7 @@ Alto.configure do |config|
   # end
 
   config.user_profile_avatar_url do |user_id|
-    "https://avatar.iran.liara.run/public/#{user_id}"
+    # "https://avatar.iran.liara.run/public/#{user_id}"
   end
 
   # Image uploads (requires ActiveStorage setup)

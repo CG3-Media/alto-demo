@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/CG3-Media/alto.git
-  revision: 1510863cdff2319c1e0c95bc2f60c49c462759a4
+PATH
+  remote: ../alto
   specs:
     alto (1.1.0)
       kaminari (~> 1.2)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_14_070111) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_16_151633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -92,11 +92,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_070111) do
     t.bigint "status_set_id"
     t.string "item_label_singular", default: "ticket"
     t.boolean "is_admin_only", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "single_view"
     t.boolean "allow_public_tagging", default: false, null: false
     t.boolean "allow_voting", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_alto_boards_on_name"
     t.index ["single_view"], name: "index_alto_boards_on_single_view"
     t.index ["slug"], name: "index_alto_boards_on_slug", unique: true
@@ -159,9 +159,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_070111) do
     t.string "color", null: false
     t.integer "position", default: 0, null: false
     t.string "slug", null: false
+    t.boolean "viewable_by_public", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "viewable_by_public", default: true, null: false
     t.index ["slug"], name: "index_alto_statuses_on_slug"
     t.index ["status_set_id", "position"], name: "index_alto_statuses_on_status_set_id_and_position"
     t.index ["status_set_id", "slug"], name: "index_alto_statuses_on_status_set_id_and_slug", unique: true
@@ -213,10 +213,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_070111) do
     t.string "user_type", null: false
     t.bigint "user_id", null: false
     t.bigint "board_id", null: false
+    t.boolean "archived", default: false, null: false
+    t.text "field_values"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "field_values"
-    t.boolean "archived", default: false, null: false
     t.index "((((title)::text || ' '::text) || COALESCE(description, ''::text))) gin_trgm_ops", name: "index_alto_tickets_on_title_description_trigram", using: :gin
     t.index ["archived"], name: "index_alto_tickets_on_archived"
     t.index ["board_id"], name: "index_alto_tickets_on_board_id"
